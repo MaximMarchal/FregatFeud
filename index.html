@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fregat Feud: an intense 2 player game</title>
+  </head>
+
+  <body>
+    <div align="left" class="titel"> <h1> Titel? </h1> </div>
+    <div align="middle" class="tijdbalk">  
+        <h2> TIME </h2>
+        <h4> Minutes:seconds</h4>
+    </div>
+    
+    
+    <button type="button" id="fullscreenButton" align="right">
+            <img src="images/fullscreen.png" max-height="25" max-width="25">
+    </button>
+    <main> 
+        <section>
+            <h2> The battlefield</h2> 
+            <div>
+
+                <div class="gameboard" id="player1board" >
+                    <h3> player1Name  </h3>    
+                    <span class="grid"> <img align="middle" alt="grid plaatje" src="images/grid.png" height="150" width="150"> </span> 
+                </div>
+                <div align = "right" class="gameboard" id="player2board">
+                    <h3> player2Name </h3>
+                    <span class="grid"> <img align="middle" alt="grid plaatje" src="images/grid.png" height="150" width="150"> </span>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="HP-bars">
+            <h2> Fleet Health</h2> 
+            <div class="hp-bar"><progress value="12" max="100"> </progress></div>
+            <div class="hp-bar"><progress value="53" max="100"> </progress></div>
+            <div class="hp-bar"><progress value="34" max="100"> </progress></div>
+            <div class="hp-bar"><progress value="39" max="100"> </progress></div>
+            <div class="hp-bar"><progress value="88" max="100"> </progress></div>
+        </section>
+        
+    </main>
+  </body>
+
+
+</html>
