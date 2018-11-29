@@ -1,7 +1,15 @@
 .player1board{
     float: left;
+    border: 3px solid cornflowerblue;
 }
 
 .player2board{
     float: right;
+    border: 3px solid rgb(216, 61, 33);
+}
+
+tr>td {
+    border: 1px solid blueviolet;
+    padding: 0;
+    margin: 0;
 }
