@@ -12,4 +12,20 @@ tr>td {
     border: 1px solid blueviolet;
     padding: 0;
     margin: 0;
+    width: 35px;
+    height: 35px;
+}
+
+footer{
+    float: bottom;
+}
+
+progress{
+    width:16%;
+    background: lightgreen;
+    border: none;
+}
+
+progress:hover{
+    background: green !important;
 }
