@@ -10,16 +10,23 @@ console.log("server online at :3000");
 var gameHistory = [];
 
 var playerQueue = [];  // Playerqueue is an array of player IDs that are not playing right now
+
+var activePlayers = []; // 
 app.post("/requestMatchmaking", function(req,res){
     console.log("Player requested matchmaking!");
     console.log("Player id: "+JSON.stringify(req.body));
     var response = {
-        "title": "You have been queued up",
+        "message": "",
         };
-    if(playerQueue.length > 0){
-        var opponentID = playerQueue.pop();
-        response["opponent_id"] = "p"+guidGenerator();
-        response["game_id"] = "g"+guidGenerator();
+
+    if(playerQueue.length > 0 && playerQueue.peek()!=req.body){
+        var opponent = playerQueue.pop();
+        response["opponent_id"] = opponent["pid"];
+        response["game_id"] = "g "+guidGenerator(); //Generate random game id 
+        response["message"] = "You have been matched with "+opponent["pid"];
+    }else{
+        response["message"] = "You have been queued up!";
+        playerQueue.push(req.body);
     }
     
     
