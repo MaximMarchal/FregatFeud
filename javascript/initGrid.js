@@ -19,6 +19,6 @@
         // Input: x,y coordinates
         // Output: a jQuery object reference to Cell(x,y)
     return function(x,y){
-        return $(x+"COMMA"+y);
+        return $("#"+x+"COMMA"+y);
     }
 }
