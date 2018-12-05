@@ -14,7 +14,7 @@
     </div>
     
     
-    <button type="button" id="fullscreenButton" align="right">
+    <button type="button" id="fullscreenButton">
             <img src="images/fullscreen.png" max-height="25" max-width="25">
     </button>
     <main> 
@@ -43,7 +43,14 @@
             </div>
         </section>
 
-       
+    <span id="dock">
+        <button>Click here to randomize ships!</button>
+        <div><p> placeholder</p></div>
+        <div><p> placeholder</p></div>
+        <div><p> placeholder</p></div>
+        <div><p> placeholder</p></div>
+        <div><p> placeholder</p></div>
+    </span>
        
         
     </main>
@@ -53,14 +60,17 @@
                 <h2> Your Fleet Health</h2> 
                 <div class="hp-bar"><progress value="12" max="100"> </progress></div>
                 <div class="hp-bar"><progress value="53" max="100"> </progress></div>
-                <div class="hp-bar"><progress value="34" max="100"> </progress></div>
-                <div class="hp-bar"><progress value="39" max="100"> </progress></div>
-                <div class="hp-bar"><progress value="88" max="100"> </progress></div>
+                <div class="hp-bar"><progress value="34" max="200"> </progress></div>
+                <div class="hp-bar"><progress value="39" max="200"> </progress></div>
+                <div class="hp-bar"><progress value="88" max="300"> </progress></div>
+                <div class="hp-bar"><progress value="88" max="300"> </progress></div>
+                <div class="hp-bar"><progress value="88" max="400"> </progress></div>
             </span>
         </section>
     </footer>
   </body>
   <script  src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
   <script src="javascript/main.js"></script>
+  <script src="javascript/initGrid.js"></script>
 
 </html>
