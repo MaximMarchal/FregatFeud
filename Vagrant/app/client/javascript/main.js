@@ -1,7 +1,7 @@
 var main = function(){
     "use strict";
     // Code hier
-    var playerID = guidGenerator();
+    var playerID = "p"+guidGenerator();
     // Add listener to the matchmaking button 
     $("#requestMatchmaking").on("click", function(){
         // Tells the server "im ready to play"
@@ -12,11 +12,11 @@ var main = function(){
     } )
 
     // Generate the table that is the grid
-    var grid = initGrid(); // grid(x,y) returns a jQuery object of cell (x,y).
+    var grid = initGrid(); // grid(x,y) returns a jQuery object of cell (x,y) from the table.
     
-    // Place the ships in a space where you can drag them around.
+    // todo Place the ships in a space where you can drag them around.
     
-    // Add a listener to the randomize button --> pressing it should randomize the ships' locations
+    // todo Add a listener to the randomize button --> pressing it should randomize the ships' locations
 
 
     // Somehow make the ships draggable
