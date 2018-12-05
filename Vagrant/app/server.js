@@ -1,11 +1,25 @@
-var http = require("http"),
-    server;
+var express = require("express"),
+    http = require("http"),
+    app = express();
 
-server = http.createServer(function (req, res) {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("Hello World!\n");
+app.use(express.static(__dirname+"/client"));
+http.createServer(app).listen(3000);
+app.use(express.urlencoded());
+console.log("server online at :3000");
+
+var gameHistory = [];
+
+app.get("/submitTurn", function(req, res){
+    gameHistory.push(req); 
+
+    // Send an "OK" if the move is valid    
+    // Send "NOK" if move is invalid
+    console.log("received submitTurn");
+    res.send("submitTurn request received");
 });
 
-server.listen(3000);
-
-console.log("Server running on port 3000");
+app.post("/requestMatchmaking", function(req,res){
+    console.log("Player requested matchmaking!");
+    console.log("Player id: "+req.body);
+    res.send("Message received");
+});
