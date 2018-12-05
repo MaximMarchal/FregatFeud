@@ -1,6 +1,7 @@
 var main = function(){
     "use strict";
     var playerID = "p "+guidGenerator(); 
+
     // Add listener to the matchmaking button 
     $("#requestMatchmaking").on("click", function(){
         // Tells the server "im ready to play"
@@ -8,7 +9,18 @@ var main = function(){
         $.post("requestMatchmaking", {"pid":playerID}, function(response){
             console.table(response);
         } )
-    } )
+
+        // Adds a button to the console button span to indicate we are queued
+        var $queuedButton = $("<button>").attr("id","queued_button");
+        $queuedButton.on("click", function(){ // When the button is pressed, ask the server our game ID
+            $.post("/request_game_id", {"pid":playerID}, function(response){
+                console.table(response);
+            });
+        });
+        $queuedButton.text("ask game id");
+        $("#console_buttons").append($queuedButton);
+        
+    } );
 
     // Generate the table that is the grid
     var grid = initGrid(); // grid(x,y) returns a jQuery object of cell (x,y) from the table.

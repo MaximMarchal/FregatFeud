@@ -1,6 +1,7 @@
 var express = require("express"),
     http = require("http"),
-    app = express();
+    app = express(),
+    Game = require("./game.js");
 
 app.use(express.static(__dirname+"/client"));
 http.createServer(app).listen(3000);
@@ -11,7 +12,8 @@ var gameHistory = [];
 
 var playerQueue = [];  // Playerqueue is an array of player IDs that are not playing right now
 
-var activePlayers = []; // 
+var active_games = [];
+var player_game_map = [];
 app.post("/requestMatchmaking", function(req,res){
     console.log("Player requested matchmaking!");
     console.log("Player id: "+JSON.stringify(req.body));
@@ -19,18 +21,30 @@ app.post("/requestMatchmaking", function(req,res){
         "message": "",
         };
 
-    if(playerQueue.length > 0 && playerQueue.peek()!=req.body){
+    if(playerQueue.length > 0){
         var opponent = playerQueue.pop();
         response["opponent_id"] = opponent["pid"];
-        response["game_id"] = "g "+guidGenerator(); //Generate random game id 
-        response["message"] = "You have been matched with "+opponent["pid"];
+        var new_game = new Game(opponent["pid"], req.body["pid"]);
+        
+        active_games.push(new_game);
+        player_game_map[new_game.get_players["0"]] = new_game.get_id();
+        player_game_map[new_game.get_players["1"]] = new_game.get_id();
+        console.log(JSON.stringify(active_games));
+        response["Game information"] = new_game;
     }else{
         response["message"] = "You have been queued up!";
         playerQueue.push(req.body);
+        console.log(req.body["pid"]+" queued.");
     }
     
     
     res.send(response);
+});
+
+app.post("/request_game_id", function(req, res){
+    var client_pid = req.body["pid"];
+    var response = {"message":"Your game id is: "};
+    res.send();
 });
 
 app.get("/submitTurn", function(req, res){
@@ -42,10 +56,3 @@ app.get("/submitTurn", function(req, res){
     res.send("submitTurn request received");
 });
 
-function guidGenerator() {
-    // From: https://stackoverflow.com/questions/6860853/generate-random-string-for-div-id
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
