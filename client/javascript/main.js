@@ -1,25 +1,24 @@
 var main = function(){
     "use strict";
-    var playerID = "p "+guidGenerator(); 
+    var player_id = "p "+guidGenerator(); 
 
-    // Add listener to the matchmaking button 
+    // Add listener to the matchmaking button (temporary button)
     $("#requestMatchmaking").on("click", function(){
-        // Tells the server "im ready to play"
-        // Sends the player's ID as payload
-        $.post("requestMatchmaking", {"pid":playerID}, function(response){
-            console.table(response);
-        } )
-
-        // Adds a button to the console button span to indicate we are queued
-        var $queuedButton = $("<button>").attr("id","queued_button");
-        $queuedButton.on("click", function(){ // When the button is pressed, ask the server our game ID
-            $.post("/request_game_id", {"pid":playerID}, function(response){
-                console.table(response);
-            });
+        var socket = new WebSocket("ws://localhost:3000"); 
+        socket.onopen(function (){
+            socket.send({"id":player_id});
         });
-        $queuedButton.text("ask game id");
-        $("#console_buttons").append($queuedButton);
-        
+
+        socket.onmessage( function(message) { // What to do when we receive a message from the server
+            // Server message: {p0: pid0, p1: pid1, shot: {x: , y: } ...maybe more}
+            var player_id0 = message["p0"];
+            var player_id1 = message["p1"];
+            if(!(player_id0==player_id || player_id1==player_id)){ // If the server message is aimed at someone else, tell the server.
+                socket.send("Message arrived at wrong player!");
+            }else{
+                
+            }
+        });
     } );
 
     // Generate the table that is the grid
