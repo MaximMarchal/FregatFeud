@@ -8,12 +8,12 @@ http.createServer(app).listen(3000);
 app.use(express.urlencoded());
 console.log("server online at :3000");
 
-var gameHistory = [];
+var games = {"games": ""};
+var queue = {"players": []};
 
-var playerQueue = [];  // Playerqueue is an array of player IDs that are not playing right now
 
-var active_games = [];
-var player_game_map = [];
+
+
 app.post("/requestMatchmaking", function(req,res){
     console.log("Player requested matchmaking!");
     console.log("Player id: "+JSON.stringify(req.body));
@@ -47,12 +47,4 @@ app.post("/request_game_id", function(req, res){
     res.send();
 });
 
-app.get("/submitTurn", function(req, res){
-    gameHistory.push(req); 
-
-    // Send an "OK" if the move is valid    
-    // Send "NOK" if move is invalid
-    console.log("received submitTurn");
-    res.send("submitTurn request received");
-});
 

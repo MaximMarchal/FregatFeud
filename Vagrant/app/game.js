@@ -1,7 +1,7 @@
 var Game = function (pid0, pid1){
     this.pid0 = pid0;
     this.pid1 = pid1;
-    this.ID = "g "+guidGenerator();
+    this.game_id = "g "+guidGenerator();
 
 }
 Game.prototype.get_id = function(){
