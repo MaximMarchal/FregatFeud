@@ -64,7 +64,7 @@ var main = function(){
                     console.log("ENQUEUED received");
                     return;
                 default:
-                    socket.send("Sorry, I didnt get that!");
+                    socket.send("Unknown message: "+JSON.stringify(message));
                     socket.close();
                     return;
             }
